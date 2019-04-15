@@ -20,6 +20,11 @@ functions:
     events:
       - websocket:
           routeKey: $default
+  sendMessageHandler:
+    handler: sendMessageHandler.sendMessageHandler
+    events:
+      - websocket:
+          routeKey: sendMessage
     
 
 resources:

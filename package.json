@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/connecttoconnecticut/tennis-whisp-aws#readme",
   "dependencies": {
+    "async": "^2.6.2",
+    "aws-sdk": "^2.437.0",
     "mysql": "^2.16.0",
     "serverless-websockets-plugin": "^1.0.0"
   }
