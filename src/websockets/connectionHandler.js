@@ -8,7 +8,7 @@ const succesfullResponse = {
 }
 
 module.exports.connectionHandler = (event,context,callback) => {
-    console.log(event);
+    console.log('ConnHandler -> ' + event);
     if(event.requestContext.eventType === 'CONNECT'){
         addConnection(event.requestContext.connectionId,function(connErr,succ){
             if(succ){
