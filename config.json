@@ -1,0 +1,26 @@
+{
+    "DATABASE_CONNECTION" : {
+        "host": "local-rds-db-bob.clzs1eir1vsh.eu-central-1.rds.amazonaws.com",
+        "user": "Bobejn",
+        "password": "bob12345",
+        "database": "local-rds-dbb"
+    },
+
+    "DDE_API_ROUTES" : {
+        "tournamentsDDEapi" : "https://dde-api.imggaming.com/tournaments?includeUnbooked=true&sport=tennis",
+        "playersDDEapi": "https://dde-api.imggaming.com/players",
+        "tournamentsDataDDEapi": "https://dde-api.imggaming.com/tournaments/"
+
+    },
+
+    "DDE_REQ_HEADERS" : {
+        "Authorization" : "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODQyNmMwNy02N2JmLTRlMGMtOGVkNS0yY2I0ZGYzY2IxOGUiLCJleHAiOiIyMDE5LTA0LTA4VDE2OjA2OjM5LjUxMCIsImlhdCI6IjIwMTktMDMtMjVUMTY6MDY6MzkuNTEwIiwic3ViIjoiMTI4Iiwicm9sZSI6eyJyb2xlTmFtZSI6Ik1hY2hpbmUiLCJvcGVyYXRvcklkIjoxMjh9fQ.x4gfpuPOHxNU77fl8I4U1tZPVYWtpfOPekswpGUzWTL2ih64N_rU5jushn9cBBpsHb6hkLtecJw2wyFML-6U3g",
+        "Accept" : "application/vnd.imggaming.dde.api+json;version=1"
+    },
+
+    "WEBSOCKET_API" : {
+        "api" : "wss://dde-streams.imggaming.com/tennis/events/"
+    },
+ 
+    "TOKEN" : "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODQyNmMwNy02N2JmLTRlMGMtOGVkNS0yY2I0ZGYzY2IxOGUiLCJleHAiOiIyMDE5LTA0LTA4VDE2OjA2OjM5LjUxMCIsImlhdCI6IjIwMTktMDMtMjVUMTY6MDY6MzkuNTEwIiwic3ViIjoiMTI4Iiwicm9sZSI6eyJyb2xlTmFtZSI6Ik1hY2hpbmUiLCJvcGVyYXRvcklkIjoxMjh9fQ.x4gfpuPOHxNU77fl8I4U1tZPVYWtpfOPekswpGUzWTL2ih64N_rU5jushn9cBBpsHb6hkLtecJw2wyFML-6U3g"
+}
