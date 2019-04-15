@@ -1,0 +1,19 @@
+{
+  "name": "tennis-whisp-aws",
+  "version": "1.0.0",
+  "description": "serverless-aws-websocket-lambda",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connecttoconnecticut/tennis-whisp-aws.git"
+  },
+  "author": "Bobejn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connecttoconnecticut/tennis-whisp-aws/issues"
+  },
+  "homepage": "https://github.com/connecttoconnecticut/tennis-whisp-aws#readme"
+}
