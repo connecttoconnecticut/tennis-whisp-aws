@@ -1,8 +1,16 @@
-service: tennis-whisp 
+service: tennis-whisperers 
 
 provider:
   name: aws
   runtime: nodejs8.10
+  region: eu-central-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "execute-api:ManageConnections"
+      Resource:
+        - "arn:aws:execute-api:*:*:**/@connections/*"
 
 plugins:
   - serverless-websockets-plugin
@@ -27,14 +35,14 @@ functions:
           routeKey: sendMessage
     
 
-resources:
-  Resources:
-    ChatTable:
-      Type: "AWS::RDS::DBInstance"
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: "connection_id"
-            AttributeType: "S"
-        TableName: chat
-        Engine: mysql
+#resources:
+#  Resources:
+#    RDSInstance:
+#      Type: "AWS::RDS::DBInstance"
+#      Properties:
+#        AttributeDefinitions:
+#          - AttributeName: "connection_id"
+#            AttributeType: "S"
+#        TableName: chat
+#        Engine: mysql
       

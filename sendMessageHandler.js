@@ -6,17 +6,25 @@ const AWS = require('aws-sdk');
 
 module.exports.sendMessageHandler = (event,context,callback) =>{
     console.log('SendMsgHandler -> event:: ' + event);
-    sendMessageToAllConnected(event);
+    sendMessageToAllConnected(event,function(nl,resp){
+        callback(null,resp);
+    });
 
 }
 
-let sendMessageToAllConnected = function(event) {
+let sendMessageToAllConnected = function(event,callback) {
     getConnectedIds(function(resp,succ) {
         if(succ){
             async.map(resp, function(conn_id,asyncMapCallback){
                 send(event, conn_id);
             },asyncMapCallback(null,{
                 //return/callback-value-from-sand
+                
+            },function(){
+                callback(null,{
+                    statusCode: 200,
+                    body: 'SendMessageToAllConnected -> : Success!'
+                })
             }))
         }else{
             callback(null,{
@@ -51,6 +59,7 @@ let conn = mysql.createConnection(config.DATABASE_CONNECTION);
 
 let getConnectedIds = function(callback){
     var retVal = [];
+    var selectQuery = 'SELECT * FROM chat;';
     conn.query(selectQuery, function(err, result,fields){
         if(err){
             callback(err,false);

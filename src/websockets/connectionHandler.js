@@ -34,9 +34,10 @@ module.exports.connectionHandler = (event,context,callback) => {
     }
 }
 
-let conn = mysql.createConnection(config.DATABASE_CONNECTION);
+//let conn = mysql.createConnection(config.DATABASE_CONNECTION);
 
 function addConnection (connection_id,callback){
+    let conn = mysql.createConnection(config.DATABASE_CONNECTION);
     let insertquery = `INSERT INTO chat (connection_id) VALUES ('${connection_id}');`;
     conn.query(insertquery,function(err){
         if(err){
@@ -50,7 +51,8 @@ function addConnection (connection_id,callback){
 }
 
 function deleteConnection (connection_id,callback){
-    let deletequery = `DELETE FROM chat WHERE connection_id=${connection_id};`;
+    let conn = mysql.createConnection(config.DATABASE_CONNECTION);
+    let deletequery = `DELETE FROM chat WHERE connection_id='${connection_id}';`;
     conn.query(deletequery,function(err){
         if(err){
             console.log('ConnHandler -> Deleteconnection err: ' + err);
