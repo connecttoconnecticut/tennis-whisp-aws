@@ -8,7 +8,7 @@ const succesfullResponse = {
 }
 
 module.exports.connectionHandler = (event,context,callback) => {
-    console.log('ConnHandler -> event:: ' + event);
+    console.log('ConnHandler -> event:: ' + JSON.stringify(event));
     if(event.requestContext.eventType === 'CONNECT'){
         addConnection(event.requestContext.connectionId,function(connErr,succ){
             if(succ){
@@ -37,6 +37,7 @@ module.exports.connectionHandler = (event,context,callback) => {
 //let conn = mysql.createConnection(config.DATABASE_CONNECTION);
 
 function addConnection (connection_id,callback){
+    console.log('Add connection -> Called!');
     let conn = mysql.createConnection(config.DATABASE_CONNECTION);
     let insertquery = `INSERT INTO chat (connection_id) VALUES ('${connection_id}');`;
     conn.query(insertquery,function(err){
@@ -51,6 +52,7 @@ function addConnection (connection_id,callback){
 }
 
 function deleteConnection (connection_id,callback){
+    console.log('Delete connection -> Called!');
     let conn = mysql.createConnection(config.DATABASE_CONNECTION);
     let deletequery = `DELETE FROM chat WHERE connection_id='${connection_id}';`;
     conn.query(deletequery,function(err){

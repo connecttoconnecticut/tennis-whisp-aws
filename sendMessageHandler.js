@@ -15,17 +15,16 @@ module.exports.sendMessageHandler = (event,context,callback) =>{
 let sendMessageToAllConnected = function(event,callback) {
     getConnectedIds(function(resp,succ) {
         if(succ){
-            async.map(resp, function(conn_id,asyncMapCallback){
-                send(event, conn_id);
-            },asyncMapCallback(null,{
-                //return/callback-value-from-sand
-                
-            },function(){
+            async.map(resp,function(item,mapCallback){
+                send(event,item,function(retVal){
+                    console.log('Send callback -> ' + retVal);
+                })
+            },function(err,asyncMapRetVal){
                 callback(null,{
                     statusCode: 200,
                     body: 'SendMessageToAllConnected -> : Success!'
                 })
-            }))
+            })
         }else{
             callback(null,{
                 statusCode: 500,
@@ -35,7 +34,7 @@ let sendMessageToAllConnected = function(event,callback) {
     })
 }
 
-let send = function (event, connection_id) {
+let send = function (event, connection_id,callback) {
     const body = JSON.parse(event.body);
     const postData = body.data; //message
 
@@ -49,15 +48,18 @@ let send = function (event, connection_id) {
         ConnectionId : connection_id,
         Data: postData
     };
-
-    return apiGWManagmentApi.postToConnection(params);
+    console.log('SendMsg -> ' + postData + ' should be sended.');
+    //return apiGWManagmentApi.postToConnection(params);
+    callback(apiGWManagmentApi.postToConnection(params));
 }
 
 
 
-let conn = mysql.createConnection(config.DATABASE_CONNECTION);
+
 
 let getConnectedIds = function(callback){
+    console.log('GetConnected Ids -> Called!');
+    let conn = mysql.createConnection(config.DATABASE_CONNECTION);
     var retVal = [];
     var selectQuery = 'SELECT * FROM chat;';
     conn.query(selectQuery, function(err, result,fields){
@@ -67,6 +69,7 @@ let getConnectedIds = function(callback){
             result.forEach(function(val){
                 retVal.push(val.connection_id)
             });
+            console.log('GetConnected Ids -> RetVal --> ', retVal);
             callback(retVal,true);
         }
     })
