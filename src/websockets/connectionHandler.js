@@ -2,9 +2,12 @@
 const mysql = require('mysql');
 const config = require('../../config.json');
 
+//require('aws-sdk/clients/apigatewaymanagmentapi');
+
 const succesfullResponse = {
-    statusCode: 200,
-    body: 'ConnHandler -> Everything is alright...'
+    "statusCode": 200,
+    "body": 'ConnHandler -> Everything is alright...',
+    "isBase64Encoded" : false
 }
 
 module.exports.connectionHandler = (event,context,callback) => {
@@ -12,23 +15,29 @@ module.exports.connectionHandler = (event,context,callback) => {
     if(event.requestContext.eventType === 'CONNECT'){
         addConnection(event.requestContext.connectionId,function(connErr,succ){
             if(succ){
-                callback(null,succesfullResponse);
+                console.log('ConnHandler -> Addconnection: Success!');
+                callback(null,(succesfullResponse));
+                context.succeed('Connect -> Done!');
             }else{
-                callback(null, {
-                    statusCode: 500,
-                    body: 'Failed to connect to db: ' + JSON.stringify(connErr)
-                });
+                xcallback(null, JSON.stringify({
+                    "statusCode": 500,
+                    "body": 'Failed to connect to db: ' + JSON.stringify(connErr)
+                }));
+                context.succeed('Connect -> Done!');
             };
         });
     }else if(event.requestContext.eventType === 'DISCONNECT'){
         deleteConnection(event.requestContext.connectionId,function(connErr,succ){
             if(succ){
-                callback(null,succesfullResponse);
+                console.log('ConnHandler -> Deleteconnection: Success!');
+                callback(null,JSON.stringify(succesfullResponse));
+                context.succeed('Disconnect -> Done!');
             }else{
-                callback(null, {
-                    statusCode: 500,
-                    body: 'Failed to connect to db: ' + JSON.stringify(connErr)
-                });
+                callback(null, JSON.stringify({
+                    "statusCode": 500,
+                    "body": 'Failed to connect to db: ' + JSON.stringify(connErr)
+                }));
+                context.succeed('Disconnect -> Error!');
             };
         });
     }
@@ -45,7 +54,6 @@ function addConnection (connection_id,callback){
             console.log('ConnHandler -> Addconnection err: ' + err);
             callback(err,false);
         }else{
-            console.log('ConnHandler -> Addconnection: Success!');
             callback(null,true);
         }
     })
@@ -60,7 +68,7 @@ function deleteConnection (connection_id,callback){
             console.log('ConnHandler -> Deleteconnection err: ' + err);
             callback(err,false);
         }else{
-            console.log('ConnHandler -> Deleteconnection: Success!');
+            //console.log('ConnHandler -> Deleteconnection: Success!');
             callback(null,true);
         }
     })

@@ -5,38 +5,38 @@ provider:
   runtime: nodejs8.10
   region: eu-central-1
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - "execute-api:ManageConnections"
-      Resource:
-        - "arn:aws:execute-api:*:*:**/@connections/*"
+#  iamRoleStatements:
+#    - Effect: Allow
+#      Action:
+#        - "execute-api:ManageConnections"
+#      Resource:
+#        - "arn:aws:execute-api:*:*:**/@connections/*"
 
-plugins:
-  - serverless-websockets-plugin
+#plugins:
+#  - serverless-websockets-plugin
 
 functions:
   connectionHandler:
     handler: src/websockets/connectionHandler.connectionHandler
     events:
       - websocket:
-        routeKey: $connect
+          route: $connect
       - websocket:
-        routeKey: $disconnect
+          route: $disconnect
   defaultHandler:
     handler: src/websockets/defaultHandler.defaultHandler
     events:
       - websocket:
-          routeKey: $default
+          route: $default
   sendMessageHandler:
     handler: sendMessageHandler.sendMessageHandler
     events:
       - websocket:
-          routeKey: sendMessage
+          route: sendMessage
     
 
 #resources:
-#  Resources:
+# Resources:
 #    RDSInstance:
 #      Type: "AWS::RDS::DBInstance"
 #      Properties:
@@ -44,5 +44,5 @@ functions:
 #          - AttributeName: "connection_id"
 #            AttributeType: "S"
 #        TableName: chat
-#        Engine: mysql
+#       Engine: mysql
       
