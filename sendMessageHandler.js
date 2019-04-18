@@ -17,9 +17,10 @@ let sendMessageToAllConnected = function(event,callback) {
         if(succ){
             async.map(resp,function(item,mapCallback){
                 send(event,item,function(retVal){
-                    console.log('Send callback -> ' + retVal);
+                    console.log('Send callback -> ' + JSON.stringify(retVal));
                 })
             },function(err,asyncMapRetVal){
+                console.log('All messages shoud be sended!');
                 callback(null,{
                     statusCode: 200,
                     body: 'SendMessageToAllConnected -> : Success!'
@@ -48,15 +49,11 @@ let send = function (event, connection_id,callback) {
         ConnectionId : connection_id,
         Data: postData
     };
-    console.log('Endpoint -> : ' + apiGWManagmentApi.endpoint);
+    console.log('Endpoint -> : ' + JSON.stringify(apiGWManagmentApi.endpoint));
     console.log('SendMsg -> ' + postData + ' should be sended to: ' + params.ConnectionId);
-    return apiGWManagmentApi.postToConnection(params);
-    //callback(apiGWManagmentApi.postToConnection(params));
+    //return apiGWManagmentApi.postToConnection(params);
+    callback(apiGWManagmentApi.postToConnection(params));
 }
-
-
-
-
 
 let getConnectedIds = function(callback){
     console.log('GetConnected Ids -> Called!');
