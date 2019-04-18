@@ -48,9 +48,10 @@ let send = function (event, connection_id,callback) {
         ConnectionId : connection_id,
         Data: postData
     };
-    console.log('SendMsg -> ' + postData + ' should be sended.');
-    //return apiGWManagmentApi.postToConnection(params);
-    callback(apiGWManagmentApi.postToConnection(params));
+    console.log('Endpoint -> : ' + apiGWManagmentApi.endpoint);
+    console.log('SendMsg -> ' + postData + ' should be sended to: ' + params.ConnectionId);
+    return apiGWManagmentApi.postToConnection(params);
+    //callback(apiGWManagmentApi.postToConnection(params));
 }
 
 
@@ -62,15 +63,24 @@ let getConnectedIds = function(callback){
     let conn = mysql.createConnection(config.DATABASE_CONNECTION);
     var retVal = [];
     var selectQuery = 'SELECT * FROM chat;';
-    conn.query(selectQuery, function(err, result,fields){
+    conn.connect(function(err){
         if(err){
+            console.log('ConnHandler -> Disconnect to DB err: ' + err);
             callback(err,false);
         }else{
-            result.forEach(function(val){
-                retVal.push(val.connection_id)
-            });
-            console.log('GetConnected Ids -> RetVal --> ', retVal);
-            callback(retVal,true);
+            conn.query(selectQuery, function(err, result,fields){
+                if(err){
+                    conn.end();
+                    callback(err,false);
+                }else{
+                    result.forEach(function(val){
+                        retVal.push(val.connection_id)
+                    });
+                    console.log('GetConnected Ids -> RetVal --> ', retVal);
+                    conn.end();
+                    callback(retVal,true);
+                }
+            })
         }
     })
 }
