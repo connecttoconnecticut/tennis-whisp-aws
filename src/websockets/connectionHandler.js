@@ -1,6 +1,7 @@
 'use strict';
 const mysql = require('mysql');
 const config = require('../../config.json');
+const ws = require('ws');
 
 //require('aws-sdk/clients/apigatewaymanagmentapi');
 

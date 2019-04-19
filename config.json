@@ -22,5 +22,10 @@
         "api" : "wss://dde-streams.imggaming.com/tennis/events/"
     },
  
-    "TOKEN" : "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODQyNmMwNy02N2JmLTRlMGMtOGVkNS0yY2I0ZGYzY2IxOGUiLCJleHAiOiIyMDE5LTA0LTA4VDE2OjA2OjM5LjUxMCIsImlhdCI6IjIwMTktMDMtMjVUMTY6MDY6MzkuNTEwIiwic3ViIjoiMTI4Iiwicm9sZSI6eyJyb2xlTmFtZSI6Ik1hY2hpbmUiLCJvcGVyYXRvcklkIjoxMjh9fQ.x4gfpuPOHxNU77fl8I4U1tZPVYWtpfOPekswpGUzWTL2ih64N_rU5jushn9cBBpsHb6hkLtecJw2wyFML-6U3g"
+    "TOKEN" : "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwODQyNmMwNy02N2JmLTRlMGMtOGVkNS0yY2I0ZGYzY2IxOGUiLCJleHAiOiIyMDE5LTA0LTA4VDE2OjA2OjM5LjUxMCIsImlhdCI6IjIwMTktMDMtMjVUMTY6MDY6MzkuNTEwIiwic3ViIjoiMTI4Iiwicm9sZSI6eyJyb2xlTmFtZSI6Ik1hY2hpbmUiLCJvcGVyYXRvcklkIjoxMjh9fQ.x4gfpuPOHxNU77fl8I4U1tZPVYWtpfOPekswpGUzWTL2ih64N_rU5jushn9cBBpsHb6hkLtecJw2wyFML-6U3g",
+
+    "AWS_CONFIG": {
+        "REGION" : "eu-central-1"
+    }
+    
 }
