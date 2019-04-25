@@ -31,18 +31,21 @@ functions:
     events:
       - websocket:
           route: $default
-  sendMessageHandler:
-    handler: sendMessageHandler.sendMessageHandler
-    events:
-      - websocket:
-          route: sendMessage
-  liveEventsHandler:
-    handler: src/live_events.liveEventsHandler
-  testStreamHandler:
-    handler: src/testStream.testStreamHandler
-    events:
-      - websocket:
-          route: testStream
+  tournaments:
+    handler: src/lambdas/tournaments.getTournaments
+    timeout: 5
+  players:
+    handler: src/lambdas/players.getPlayers
+    timeout: 5
+  tournDraws:
+    handler: src/lambdas/tournDraws.tournamentDraws
+    timeout: 5
+  tournEvents:
+    handler: src/lambdas/tournEvents.tournamentEvents
+    timeout: 5
+  tournResults:
+    handler: src/lambdas/tournResults.getResults
+    timeout: 5
     
 
 #resources:
